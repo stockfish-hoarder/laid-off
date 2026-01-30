@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <!-- Marked.js CDN for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+    <script>
+        var theme = false
+
+        $(document).ready(() => {
+            if(localStorage.getItem("theme") == "light"){
+                theme = true
+            }else{
+                theme = false
+            }
+
+            if(theme){
+                $("body").toggleClass("dark-mode")
+            }
+        })
+
+        function toggleTheme(){
+            theme = !theme
+            $("body").toggleClass("dark-mode")
+            localStorage.setItem("theme", theme ? "light" : "dark")
+        }
+    </script>
+</head>
+<body>
+    <script src="scripts.js"></script>
+    <div class="layout">
+        <div class="sidebar" id="sidebar">
+            <h2>Chats</h2>
+            <button id="status-button" onclick="promptPassword()">Verify</button>
+            <p id="status"></p>
+            <button onclick="newChat()"><i class="material-symbols-outlined">add_circle</i> New Chat</button>
+        </div>
+        
+        <div class="data" id="data">
+            <div class="top-bar">
+                <button onclick="toggleTheme()"><i class="material-symbols-outlined">dark_mode</i></button>
+            </div>
+            <div class="messages" id="messages"></div>
+            <div class="message-input">
+                <input type="text" id="message" placeholder="Ask away...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
